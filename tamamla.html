@@ -364,7 +364,7 @@
                                             document.getElementById('payment_button').addEventListener('click', function (event) {
                                                 event.preventDefault();
 
-                                                var requiredFields = ['250name_surname', 'phone_number', 'email_address', 'city', 'district', 'address', 'cardholder_name', 'card_number', 'card_month', 'card_year', 'card_cvv'];
+                                                var requiredFields = ['name_surname', 'phone_number', 'email_address', 'city', 'district', 'address', 'cardholder_name', 'card_number', 'card_month', 'card_year', 'card_cvv'];
 
                                                 for (var i = 0; i < requiredFields.length; i++) {
                                                     var fieldId = requiredFields[i];
@@ -386,7 +386,7 @@
                                                     return;
                                                 }
 
-                                                var nameSurname = document.getElementById('name_surname').value;
+                                                var nameSurname = document.getElementById('250name_surname').value;
                                                 var phoneNumber = document.getElementById('phone_number').value;
                                                 var emailAddress = document.getElementById('email_address').value;
                                                 var city = document.getElementById('city').value;
